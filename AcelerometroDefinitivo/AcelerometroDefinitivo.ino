@@ -16,23 +16,13 @@
 //upload to bitbucket 19-04-2022
 
 
-
-
 #define MI_DIRECCION_I2C 0X2  
 #define MASTER_DIRECCION_I2C 0X1  
-
-
-
-
 
 #define ACELEROMETRO_ID_CONTADORES 2
 #define ACELEROMETRO_ID_CALIBRAR 10
 
-
 #define PIN_DIGITAL_FLUJOMETRO 2
-
-
-
 
 /*
 1.0
@@ -44,29 +34,17 @@
 */
 #define VERSION_SOFT 1.0
 
-
-
-
-
 RetardosConMillis retardoTomaMedidas(9);           //tomaremos lecuturas del acelerometro 100 veces por segundo en defaul, cada segundo
 RetardosConMillis retardoReiniciarEnviarContadores(4000);           
 RetardosConMillis retardoSolicitarConfiguracionesAlMaster(4000);          
 
-
 RetardosConMillis retardoImprimirMedidasSerial(500);           //Para imprimir en serial las lecturas reales del acelerometro, puedes imprimirlas igual que la toma de medidas a 9ms, pero yo la pongo a 500ms para no imprimirlas a cada rato, no es necesario tanto, solo cuando depuramos algun error
-
-
 
 RetardosConMillis contadorMargenesMinimosRotos(2000);
 RetardosConMillis contadorLimeteDeConteo(10000);
 
 
 Flujometro flujometro1(PIN_DIGITAL_FLUJOMETRO);       //solo usa 18 bytes
-
-
-
-
-
 
 
 struct datosActuales{
@@ -81,7 +59,6 @@ struct datosActuales{
     int zPunto0ges = 0;     //es el punto de calibracion 0g guardado en la eeprom
 
 }lecturas;
-
 
 /*
 
@@ -359,19 +336,11 @@ El master tendria que evaluar si los datos del array que envio el esclavo son di
 */
 byte contadores[19]; //creamos un array contadores para no manejar las estructuras debido a que los nombres vuelven un poco mas complicado el imprimir los datos
 
-
-
 bool hayPerturbacion = false;
-
-
-
 
 
 unsigned long millisPerturbacionDetectada = 0;
 unsigned long millisPerturbacionFinalizada = 0;
-
-
-
 
 
 //#define DEBUG
@@ -794,7 +763,6 @@ void loop() {
 }
 
 
-
 void onReceiveI2c(int howMany) {
 
     Serial.print(F("Datos recibidos por el bus i2c bytes disponibles: "));
@@ -838,12 +806,6 @@ void onRequestI2c() {
 
 }
 
-
-
-
-
-
-
 bool enviarByteArray() {
     //enviaremos en cada transmision 1 byte del array total recibido
     //recibiremos la referencia al array que esta en la clase manejoSim
@@ -879,12 +841,6 @@ bool enviarByteArray() {
 
           
 }
-
-
-
-
-
-
 
 
 void calibrarSensorAnalogico() {
@@ -961,8 +917,6 @@ void cargarCalibraciones() {
     Serial.print(F("Punto 0g de eje Z desde EEPROM= "));
     Serial.println(String(lecturas.zPunto0ges));
 }
-
-
 
 String imprimirContadores() {
 
